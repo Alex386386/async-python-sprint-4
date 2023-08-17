@@ -2,7 +2,7 @@
 
 Revision ID: 01
 Revises: 
-Create Date: 2023-08-15 11:44:45.886038
+Create Date: 2023-08-17 12:16:25.325614
 
 """
 from alembic import op
@@ -33,13 +33,13 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('short_url', sa.String(length=100), nullable=True),
     sa.Column('original_url', sa.String(length=300), nullable=True),
-    sa.Column('type', sa.String(), nullable=True),
+    sa.Column('type', sa.String(length=10), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], name='fk_shorturl_user_id_user'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('urlaccesslog',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('short_url_id', sa.Integer(), nullable=True),
+    sa.Column('short_url_id', sa.Integer(), nullable=False),
     sa.Column('access_time', sa.DateTime(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['short_url_id'], ['shorturl.id'], ),

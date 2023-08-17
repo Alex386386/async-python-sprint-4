@@ -1,4 +1,5 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
 
 from app.core.db import Base
 
@@ -10,4 +11,5 @@ class ShortURL(Base):
     )
     short_url = Column(String(100))
     original_url = Column(String(300))
-    type = Column(String, default='public')
+    type = Column(String(10), default='public')
+    url_access = relationship('URLAccessLog', cascade='delete')

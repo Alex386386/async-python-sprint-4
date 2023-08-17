@@ -4,7 +4,11 @@ from app.core.db import Base
 
 
 class URLAccessLog(Base):
-    short_url_id = Column(Integer, ForeignKey('shorturl.id'))
+    short_url_id = Column(
+        Integer,
+        ForeignKey('shorturl.id'),
+        nullable=False,
+    )
     access_time = Column(DateTime)
     user_id = Column(
         Integer,

@@ -30,9 +30,8 @@ async def ping_db(session: AsyncSession = Depends(get_async_session)):
         current_time = result.scalar_one_or_none()
         if current_time:
             return {'status': 'ok', 'timestamp': current_time}
-        else:
-            raise HTTPException(status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-                                detail='Database error')
+        raise HTTPException(status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
+                            detail='Database error')
     except Exception as e:
         raise HTTPException(status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
                             detail=str(e))
